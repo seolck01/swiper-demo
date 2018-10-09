@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .keJi{
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            margin:100px auto;
+            margin-bottom: 0px;    
+        }
+        .images{
+            height: 200px;
+            width: 1200px;
+            display: flex;
+            transition: all 1s;
+        }
+        .images>img{
+            width: 300px;
+            height: 200px;
+        }
+        .buttons{
+            text-align: center;
+        }
+        .buttons>span{
+            border: 1px solid red;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="keJi" id="keJi">
+        <div class="images">
+            <img src="images/1.jpg" alt="">
+            <img src="images/2.jpg" alt="">
+            <img src="images/3.jpeg" alt="">
+            <img src="images/01569658d947b2a801219c77dbcf7e.jpg@1280w_1l_2o_100sh.jpg" alt="">
+        </div>
+    </div>
+    <div class="buttons">
+        <span id="btn" class="red">图片1</span>
+        <span id="btn">图片2</span>
+        <span id="btn">图片3</span>
+        <span id="btn">图片4</span>
+    </div>
+</body>
+<script>
+    var allbuttons=$(".buttons>#btn");
+    for(var i=0;i<allbuttons.length;i++){
+        $(allbuttons[i]).on("click",function(x){
+            var btnindex=$(x.currentTarget).index();
+            index1=btnindex
+            $(allbuttons).eq(index1).addClass("red").siblings(".red").removeClass("red");
+            $(".images").css({transform:"translateX("+btnindex*-300+"px)"})
+        })
+    }
+    index1=0;
+    var timer=setInterval(function(){
+        index1++;
+        $(allbuttons).eq(index1%4).trigger("click")
+    },3000)
+    $(".keJi").on("mouseenter",function(){
+        window.clearInterval(timer);
+    })
+    $(".keJi").on("mouseleave",function(){
+        timer=setInterval(()=>{
+            index1++;
+            $(allbuttons).eq(index1%4).trigger("click")
+        },3000)
+    })
+</script>
+</html>
