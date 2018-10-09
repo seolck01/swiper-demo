@@ -57,23 +57,28 @@
         $(allbuttons[i]).on("click",function(x){
             var btnindex=$(x.currentTarget).index();
             index1=btnindex
-            $(allbuttons).eq(index1).addClass("red").siblings(".red").removeClass("red");
+            redButton($(allbuttons).eq(index1));
             $(".images").css({transform:"translateX("+btnindex*-300+"px)"})
         })
     }
     index1=0;
-    var timer=setInterval(function(){
-        index1++;
-        $(allbuttons).eq(index1%4).trigger("click")
-    },3000)
+    buttonTrigger();
+
     $(".keJi").on("mouseenter",function(){
         window.clearInterval(timer);
     })
     $(".keJi").on("mouseleave",function(){
-        timer=setInterval(()=>{
+        buttonTrigger();
+    })
+
+    function buttonTrigger(){
+            timer=setInterval(()=>{
             index1++;
             $(allbuttons).eq(index1%4).trigger("click")
-        },3000)
-    })
+        },2000)
+    }
+    function redButton($button){
+        $button.addClass("red").siblings(".red").removeClass("red");
+    }
 </script>
 </html>
